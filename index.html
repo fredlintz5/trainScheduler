@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang=“en">
+
+<head>
+    <meta charset=“UTF-8">
+
+        <!--Responsive Mobile Meta Tag-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Train Scheduler</title>
+    
+        <!--Bootstrap links, CSS, JQUERY, JavaScript-->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+	<br>
+	<br>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Current Train Schedule</div>
+		<div class="panel-body table-responsive">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Train Name</th>
+						<th>Destination</th>
+						<th>Frequency(min)</th>
+						<th>Arrival Time</th>
+						<th>Minutes Away</th>
+					</tr>
+				</thead>
+				<tbody></tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="panel panel-primary">
+		<div class="panel-heading">Add Train</div>
+		<div class="panel-body" id="panelBody">
+			<div class="form-group">
+				<label for="name">Train Name</label>
+				<input type="text" class="form-control" id="name">
+			</div>
+			<div class="form-group">
+				<label for="dest">Destination</label>
+				<input type="text" class="form-control" id="dest">
+			</div>
+			<div class="form-group">
+				<label for="time">First Train Time (HH:mm - military time)</label>
+				<input type="text" class="form-control" id="time">					
+			</div>
+			<div class="form-group">
+				<label for="freq">Frequency (min)</label>
+				<input type="text" class="form-control" id="freq">					
+			</div>
+			<button class="btn btn-primary" id='submit' type="submit">Submit</button>
+		</div>
+	</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<script src="assets/javascript/logic.js"></script>
+</body>
+</html>
