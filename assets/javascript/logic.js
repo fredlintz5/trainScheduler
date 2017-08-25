@@ -11,7 +11,28 @@ firebase.initializeApp(config);
 
 // Get a reference to the database service
 var database = firebase.database();
-var localArray = [];
+
+// Create an instance of the GitHub provider object
+var provider = new firebase.auth.GithubAuthProvider();
+
+
+firebase.auth().signInWithPopup(provider).then(function(result) {
+  // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+  var token = result.credential.accessToken;
+  // The signed-in user info.
+  var user = result.user;
+  // ...
+}).catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // The email of the user's account used.
+  var email = error.email;
+  // The firebase.auth.AuthCredential type that was used.
+  var credential = error.credential;
+  // ...
+});
+
 
 // At the initial load and on subsequent data value changes, 
 // get a snapshot of the current data.
@@ -30,6 +51,8 @@ database.ref().on("value", function(snapshot) {
 })
 
 
+// set global array variable
+var localArray = [];
 
 $('#submit').click(function(event) {
 
@@ -44,7 +67,7 @@ $('#submit').click(function(event) {
 		var tDest = $('#dest').val();
 		var tTime = $('#time').val();
 		var tFreq = $('#freq').val();
-		var tRemain = "arrivalTime - currentTime"
+		var tRemain = "arrival - current";
 		
 		var trainObject = {
 		  	name: tName,
