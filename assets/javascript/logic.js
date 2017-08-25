@@ -27,8 +27,6 @@ database.ref().on("value", function(snapshot) {
 
 		localArray = [];
 	}
-  
-  	console.log(snapshot.val());
 })
 
 
@@ -70,9 +68,23 @@ $('#submit').click(function(event) {
 		$('tbody').empty();
 		loadTrains();
 	}
-
 });
 
+
+$('tbody').on("click", "button", function() {
+
+    var indexNumber = $(this).data('index');
+	
+	localArray.splice(indexNumber, 1);
+
+	database.ref().set({
+  		databaseArray:localArray
+	})
+
+ 	$('tbody').empty();
+
+	loadTrains();	
+});
 
 
 function loadTrains() {
@@ -81,15 +93,18 @@ function loadTrains() {
 
 		var newData = $('<tr>');
 
+		newData.attr('data-index', [i]);
 		newData.append("<td>"+localArray[i].name);
 		newData.append("<td>"+localArray[i].dest);
 		newData.append("<td>"+localArray[i].time);
 		newData.append("<td>"+localArray[i].freq);
 		newData.append("<td>"+localArray[i].remain);
-		
+		newData.append("<button data-index='" + [i] + "'class='btn btn-danger'>X");
+
 		$('tbody').append(newData);
 	}
 }
+
 
 
 
