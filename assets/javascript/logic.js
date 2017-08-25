@@ -1,13 +1,13 @@
  // Initialize Firebase
 var config = {
-	apiKey: "AIzaSyCBl_hBofvq77oK68enYJmObFAzTMEnOMU",
-	authDomain: "train-scheduler-b831c.firebaseapp.com",
-	databaseURL: "https://train-scheduler-b831c.firebaseio.com",
-	projectId: "train-scheduler-b831c",
-	storageBucket: "train-scheduler-b831c.appspot.com",
-	messagingSenderId: "66954623287"
-	};
-firebase.initializeApp(config);
+    apiKey: "AIzaSyBBr2kEKW6p-xBp4kvH2qaiRQ36egOLzlE",
+    authDomain: "codersbay-8f12c.firebaseapp.com",
+    databaseURL: "https://codersbay-8f12c.firebaseio.com",
+    projectId: "codersbay-8f12c",
+    storageBucket: "codersbay-8f12c.appspot.com",
+    messagingSenderId: "657874074213"
+  };
+  firebase.initializeApp(config);
 
 // Get a reference to the database service
 var database = firebase.database();
@@ -16,9 +16,11 @@ var database = firebase.database();
 var provider = new firebase.auth.GithubAuthProvider();
 
 
+
 firebase.auth().signInWithPopup(provider).then(function(result) {
   // This gives you a GitHub Access Token. You can use it to access the GitHub API.
   var token = result.credential.accessToken;
+  console.log(token);
   // The signed-in user info.
   var user = result.user;
   // ...
