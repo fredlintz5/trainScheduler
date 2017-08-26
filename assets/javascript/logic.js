@@ -13,46 +13,46 @@ var config = {
 var database = firebase.database();
 
 // Create an instance of the GitHub provider object
-var provider = new firebase.auth.GithubAuthProvider();
+// var provider = new firebase.auth.GithubAuthProvider();
 
 
 
-firebase.auth().signInWithPopup(provider).then(function(result) {
-  // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-  var token = result.credential.accessToken;
-  console.log(token);
-  // The signed-in user info.
-  var user = result.user;
-  // ...
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
+// firebase.auth().signInWithPopup(provider).then(function(result) {
+//   // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+//   var token = result.credential.accessToken;
+//   console.log(token);
+//   // The signed-in user info.
+//   var user = result.user;
+//   // ...
+// }).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // The email of the user's account used.
+//   var email = error.email;
+//   // The firebase.auth.AuthCredential type that was used.
+//   var credential = error.credential;
+//   // ...
+// });
 
-firebase.auth().getRedirectResult().then(function(result) {
-  if (result.credential) {
-    // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-    var token = result.credential.accessToken;
-    // ...
-  }
-  // The signed-in user info.
-  var user = result.user;
-}).catch(function(error) {
-  // Handle Errors here.
-  var errorCode = error.code;
-  var errorMessage = error.message;
-  // The email of the user's account used.
-  var email = error.email;
-  // The firebase.auth.AuthCredential type that was used.
-  var credential = error.credential;
-  // ...
-});
+// firebase.auth().getRedirectResult().then(function(result) {
+//   if (result.credential) {
+//     // This gives you a GitHub Access Token. You can use it to access the GitHub API.
+//     var token = result.credential.accessToken;
+//     // ...
+//   }
+//   // The signed-in user info.
+//   var user = result.user;
+// }).catch(function(error) {
+//   // Handle Errors here.
+//   var errorCode = error.code;
+//   var errorMessage = error.message;
+//   // The email of the user's account used.
+//   var email = error.email;
+//   // The firebase.auth.AuthCredential type that was used.
+//   var credential = error.credential;
+//   // ...
+// });
 
 
 // At the initial load and on subsequent data value changes, 
@@ -86,9 +86,12 @@ $('#submit').click(function(event) {
 
 		var tName = $('#name').val();
 		var tDest = $('#dest').val();
-		var tTime = $('#time').val();
 		var tFreq = $('#freq').val();
-		var tRemain = "arrival - current";
+		var tTime = moment($('#time').val(), 'h:mm').format('h:mm');
+		console.log(tTime);
+		var now = moment().format('h:mm');
+		console.log(now);
+		var tRemain = "fuck";
 		
 		var trainObject = {
 		  	name: tName,
@@ -112,6 +115,16 @@ $('#submit').click(function(event) {
 		$('tbody').empty();
 		loadTrains();
 	}
+});
+
+$(".container").on("click", "#login", function () {
+	console.log("click");
+	window.location.href ="https://fredlintz5.github.io/trainScheduler/authorizedUser";
+});
+
+$(".container").on("click", "#logout", function () {
+	console.log("click");
+	window.location.href ="https://fredlintz5.github.io/trainScheduler/";
 });
 
 
@@ -147,6 +160,12 @@ function loadTrains() {
 
 		$('tbody').append(newData);
 	}
+}
+
+function timeConverter() {
+
+
+
 }
 
 
