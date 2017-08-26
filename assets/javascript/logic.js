@@ -89,9 +89,9 @@ $('#submit').click(function(event) {
 		var tFreq = $('#freq').val();
 		var tTime = moment($('#time').val(), 'h:mm').format('h:mm');
 		console.log(tTime);
-		var now = moment().format('h:mm');
+		var now = moment().format('lt');
 		console.log(now);
-		var tRemain = "fuck";
+		var tRemain = "";
 		
 		var trainObject = {
 		  	name: tName,
