@@ -117,11 +117,13 @@ $('#submit').click(function(event) {
 	}
 });
 
+//change page to authorized user on click of login button
 $(".container").on("click", "#login", function () {
 	console.log("click");
 	window.location.href ="https://fredlintz5.github.io/trainScheduler/authorizedUser";
 });
 
+//change page to back to main on click of logout button
 $(".container").on("click", "#logout", function () {
 	console.log("click");
 	window.location.href ="https://fredlintz5.github.io/trainScheduler/";
@@ -160,13 +162,15 @@ function loadTrains() {
 
 		$('tbody').append(newData);
 	}
+
+	var homePage = "https://fredlintz5.github.io/trainScheduler/";
+	console.log(homePage);
+
+	if (window.location.href == homePage) {
+		$('tr > button').toggleClass('hide');
+	}
 }
 
-function timeConverter() {
-
-
-
-}
 
 
 
