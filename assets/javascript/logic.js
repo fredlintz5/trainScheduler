@@ -11,71 +11,24 @@ var config = {
 
 // Get a reference to the database service
 var database = firebase.database().ref();
+// global variables
+var localArray = [];
+var editableIndexNumber;
 
-// Create an instance of the GitHub provider object
-// var provider = new firebase.auth.GithubAuthProvider();
-
-
-
-// firebase.auth().signInWithPopup(provider).then(function(result) {
-//   // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-//   var token = result.credential.accessToken;
-//   console.log(token);
-//   // The signed-in user info.
-//   var user = result.user;
-//   // ...
-// }).catch(function(error) {
-//   // Handle Errors here.
-//   var errorCode = error.code;
-//   var errorMessage = error.message;
-//   // The email of the user's account used.
-//   var email = error.email;
-//   // The firebase.auth.AuthCredential type that was used.
-//   var credential = error.credential;
-//   // ...
-// });
-
-// firebase.auth().getRedirectResult().then(function(result) {
-//   if (result.credential) {
-//     // This gives you a GitHub Access Token. You can use it to access the GitHub API.
-//     var token = result.credential.accessToken;
-//     // ...
-//   }
-//   // The signed-in user info.
-//   var user = result.user;
-// }).catch(function(error) {
-//   // Handle Errors here.
-//   var errorCode = error.code;
-//   var errorMessage = error.message;
-//   // The email of the user's account used.
-//   var email = error.email;
-//   // The firebase.auth.AuthCredential type that was used.
-//   var credential = error.credential;
-//   // ...
-// });
-
-
-// At the initial load and on subsequent data value changes, 
-// get a snapshot of the current data.
 // This callback keeps the page updated when a value changes in firebase.
 database.on("value", function(snapshot) {
 	
 	if (snapshot.child('databaseArray').exists()) {
-
 		localArray = snapshot.val().databaseArray;
 		loadTrains();
 
 	} else {
-
 		localArray = [];
 	}
 })
 
 
-// set global array variable
-var localArray = [];
-var editableIndexNumber;
-
+// onClick function collecting input values
 $('#submit').click(function(event) {
 
 	if ($('#name').val() === ""|| $('#dest').val() === ""|| $('#time').val() === "") {
@@ -88,13 +41,10 @@ $('#submit').click(function(event) {
 		var tName = $('#name').val();
 		var tDest = $('#dest').val();
 		var tTime = moment($('#time').val(), 'HH:mm A').format('h:mm A');
-		console.log(tTime);
 		var tTimeUnix = moment($('#time').val(), 'HH:mm A').format('X');
 		var currentTime = moment().format('h:mm A');
-		console.log(currentTime);
 		var currentTimeUnix = moment().format('X');
 
-		
 
 		if (tTimeUnix > currentTimeUnix) {
 			console.log('if');
@@ -130,13 +80,11 @@ $('#submit').click(function(event) {
 
 //change page to authorized user on click of login button
 $(".container").on("click", "#login", function () {
-	console.log("click");
 	window.location.href ="https://fredlintz5.github.io/trainScheduler/authorizedUser";
 });
 
 //change page to back to main on click of logout button
 $(".container").on("click", "#logout", function () {
-	console.log("click");
 	window.location.href ="https://fredlintz5.github.io/trainScheduler/";
 });
 
@@ -161,7 +109,6 @@ $('tbody').on("click", "#remove", function() {
 //edit train data on page, and update remote data
 $('tbody').on("click", "#edit", function() {
 
-	console.log(localArray);
     editableIndexNumber = $(this).data('index');
 	var offset = $(this).offset();
 
@@ -184,17 +131,14 @@ $('#editedSubmit').click(function() {
 	    var editedName = $('#editedName').val();
 		var editedDest = $('#editedDest').val();
 		var editedTime = moment($('#editedTime').val(), 'HH:mm A').format('h:mm A');
-		console.log('click');
 		var tTimeUnix = moment($('#time').val(), 'HH:mm A').format('X');
 		var currentTime = moment().format('h:mm A');
 		var currentTimeUnix = moment().format('X');
 		
 		if (tTimeUnix > currentTimeUnix) {
-			console.log('if');
 			var editedRemain = moment(editedTime, 'HH:mm A').fromNow(true) + " from now";
 
 		} else {
-			console.log('else');
 			var editedRemain = "This Train has already left";
 		}
 
@@ -226,31 +170,6 @@ $('#editedSubmit').click(function() {
 });
 	
 
-	
-
-	// if (tTimeUnix > currentTimeUnix) {
-	// 	console.log('if');
-	// 	// var tRemain = moment(tTime, 'HH:mm A').diff(moment(), "minutes");
-	// 	var tRemain = moment(tTime, 'HH:mm A').fromNow(true) + " from now";
-
-
-	// } else {
-	// 	console.log('else');
-	// 	// var tRemain = moment().diff(moment(tTime, 'HH:mm A'), "minutes");
-	// 	// var tRemain = moment(tTime, 'HH:mm A').toNow(true) + " to now";
-	// 	var tRemain = "This Train has already left";
-	// }
-
-
-	// database.set({
- //  		databaseArray:localArray
-	// })
-
- // 	$('tbody').empty();
-	// loadTrains();	
-
-
-
 //load train data form localArray to page
 function loadTrains() {
 
@@ -272,6 +191,7 @@ function loadTrains() {
 
 	var homePage = "https://fredlintz5.github.io/trainScheduler/";
 
+	// hide remove buttons on consumer screen
 	if (window.location.href == homePage) {
 		$('tr > button').toggleClass('hide');
 	}
